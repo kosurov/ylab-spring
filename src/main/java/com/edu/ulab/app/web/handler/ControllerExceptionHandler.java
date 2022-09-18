@@ -1,5 +1,6 @@
 package com.edu.ulab.app.web.handler;
 
+import com.edu.ulab.app.exception.InvalidInputException;
 import com.edu.ulab.app.exception.NotFoundException;
 import com.edu.ulab.app.web.response.BaseWebResponse;
 import lombok.NonNull;
@@ -17,10 +18,16 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<BaseWebResponse> handleNotFoundExceptionException(@NonNull final NotFoundException exc) {
         log.error(exc.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new BaseWebResponse(createErrorMessage(exc)));
     }
 
+    @ExceptionHandler(InvalidInputException.class)
+    public ResponseEntity<BaseWebResponse> handleInvalidInputExceptionException(@NonNull final InvalidInputException exc) {
+        log.error(exc.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new BaseWebResponse(createErrorMessage(exc)));
+    }
     private String createErrorMessage(Exception exception) {
         final String message = exception.getMessage();
         log.error(ExceptionHandlerUtils.buildErrorMessage(exception));

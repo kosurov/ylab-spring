@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-
 @Slf4j
 @ControllerAdvice
 public class ControllerExceptionHandler {
@@ -28,6 +27,7 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new BaseWebResponse(createErrorMessage(exc)));
     }
+
     private String createErrorMessage(Exception exception) {
         final String message = exception.getMessage();
         log.error(ExceptionHandlerUtils.buildErrorMessage(exception));

@@ -76,9 +76,10 @@ public class UserDataFacade {
         }
 
         UserDto userDto = userMapper.userRequestToUserDto(userBookRequest.getUserRequest());
+        userDto.setId(userId);
         log.info("Mapped user update request: {}", userDto);
 
-        UserDto updatedUser = userService.updateUser(userId, userDto);
+        UserDto updatedUser = userService.updateUser(userDto);
         log.info("Updated user: {}", userDto);
 
         List<BookDto> updatedBooks = IntStream.range(0, booksToBeUpdatedIdList.size()).boxed()
@@ -88,7 +89,7 @@ public class UserDataFacade {
                     return bookDto;
                 })
                 .peek(mappedBookDto -> log.info("Mapped book request: {}", mappedBookDto))
-                .map(mappedBookDto -> bookService.updateBook(mappedBookDto.getId(), mappedBookDto))
+                .map(bookService::updateBook)
                 .peek(updatedBookDto -> log.info("Updated book: {}", updatedBookDto))
                 .toList();
 

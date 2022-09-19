@@ -6,9 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Repository //todo какая аннотация нужна?
+@Repository
 public class Storage implements UserRepository, BookRepository {
-
     private final Map<Long, User> users = new HashMap<>();
     private final Map<Long, Book> books = new HashMap<>();
     private Long userId = 0L;

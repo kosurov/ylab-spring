@@ -35,11 +35,10 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDto updateBook(Long id, BookDto updatedBookDto) {
-        Book bookToBeUpdated = bookRepository.findBookById(id)
+    public BookDto updateBook(BookDto updatedBookDto) {
+        Book bookToBeUpdated = bookRepository.findBookById(updatedBookDto.getId())
                 .orElseThrow(() -> new NotFoundException("Book not found"));
         Book updatedBook = bookMapper.bookDtoToBook(updatedBookDto);
-        updatedBook.setId(id);
         updatedBook.setOwner(bookToBeUpdated.getOwner());
         bookRepository.update(updatedBook);
         return bookMapper.bookToBookDto(updatedBook);

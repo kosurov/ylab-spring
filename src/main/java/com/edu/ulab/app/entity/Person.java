@@ -1,14 +1,18 @@
 package com.edu.ulab.app.entity;
 
+
 import lombok.Data;
 
-import java.util.List;
+import javax.persistence.*;
 
+
+@Entity
 @Data
-public class User {
+public class Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fullName;
     private String title;
     private int age;
-    private List<Book> books;
 }

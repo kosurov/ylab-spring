@@ -1,10 +1,9 @@
 package com.edu.ulab.app.service;
 
-import com.edu.ulab.app.dto.BookDto;
 import com.edu.ulab.app.dto.UserDto;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
+@Repository
 public interface UserService {
     UserDto createUser(UserDto userDto);
 
@@ -13,6 +12,4 @@ public interface UserService {
     UserDto getUserById(Long id);
 
     void deleteUserById(Long id);
-
-    List<BookDto> getBooksByUserId(Long userId);
 }

@@ -11,8 +11,8 @@ import com.edu.ulab.app.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -51,23 +51,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUserById(Long id) {
+    public UserDto getUserById(Integer id) {
         Person user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User not found"));
         return userMapper.personToUserDto(user);
     }
 
     @Override
-    public void deleteUserById(Long id) {
+    public void deleteUserById(Integer id) {
         Person user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User not found"));
         log.info("Found user to delete: {}", user);
-        List<Book> books = bookRepository.findAllByUserId(id);
+        Set<Book> books = user.getBookSet();
         if (books != null && !books.isEmpty()) {
             log.info("Found books from user: {}", books);
             books.stream()
                     .filter(Objects::nonNull)
-                    .peek(book -> book.setUserId(null))
+                    .peek(book -> book.setPerson(null))
                     .peek(bookRepository::save)
                     .forEach(book -> log.info("Connection with user removed: bookId {}", book.getId()));
         }

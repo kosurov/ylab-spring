@@ -5,6 +5,7 @@ import com.edu.ulab.app.entity.Book;
 import com.edu.ulab.app.web.request.BookRequest;
 import com.edu.ulab.app.web.response.BookResponse;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface BookMapper {
@@ -14,7 +15,7 @@ public interface BookMapper {
     BookRequest bookDtoToBookRequest(BookDto bookDto);
 
     Book bookDtoToBook(BookDto bookDto);
-
+    @Mapping(target = "userId", source = "person.id")
     BookDto bookToBookDto(Book book);
 
     BookResponse bookDtoToBookResponse(BookDto bookDto);

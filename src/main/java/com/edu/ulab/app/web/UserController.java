@@ -54,7 +54,7 @@ public class UserController {
                     @ApiResponse(responseCode = "404", description = "User not found",
                             content = @Content(schema = @Schema(hidden = true)))})
     public UserBookResponse updateUserWithBooks(@RequestBody UserBookRequest request,
-                                                @PathVariable @Parameter(description = "ID of user to update") Long userId,
+                                                @PathVariable @Parameter(description = "ID of user to update") Integer userId,
                                                 @RequestHeader(RQID) @Pattern(regexp = REQUEST_ID_PATTERN)
                                                 @Parameter(description = "Request ID") final String requestId) {
         UserBookResponse response = userDataFacade.updateUserWithBooks(request, userId);
@@ -70,7 +70,7 @@ public class UserController {
                                     schema = @Schema(implementation = UserBookResponse.class))),
                     @ApiResponse(responseCode = "404", description = "User not found",
                             content = @Content(schema = @Schema(hidden = true)))})
-    public UserBookResponse getUserWithBooks(@PathVariable @Parameter(description = "ID of user to find") Long userId,
+    public UserBookResponse getUserWithBooks(@PathVariable @Parameter(description = "ID of user to find") Integer userId,
                                              @RequestHeader(RQID) @Pattern(regexp = REQUEST_ID_PATTERN)
                                              @Parameter(description = "Request ID") final String requestId) {
         UserBookResponse response = userDataFacade.getUserWithBooks(userId);
@@ -83,7 +83,7 @@ public class UserController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "OK"),
                     @ApiResponse(responseCode = "404", description = "User not found")})
-    public void deleteUserWithBooks(@PathVariable @Parameter(description = "ID of user to delete") Long userId,
+    public void deleteUserWithBooks(@PathVariable @Parameter(description = "ID of user to delete") Integer userId,
                                     @RequestHeader(RQID) @Pattern(regexp = REQUEST_ID_PATTERN)
                                     @Parameter(description = "Request ID") final String requestId) {
         log.info("Delete user and his books:  userId {}", userId);

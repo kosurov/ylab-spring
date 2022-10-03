@@ -7,9 +7,7 @@ import com.edu.ulab.app.mapper.BookMapper;
 import com.edu.ulab.app.mapper.UserMapper;
 
 import com.edu.ulab.app.service.impl.BookServiceImpl;
-import com.edu.ulab.app.service.impl.BookServiceImplTemplate;
 import com.edu.ulab.app.service.impl.UserServiceImpl;
-import com.edu.ulab.app.service.impl.UserServiceImplTemplate;
 import com.edu.ulab.app.web.request.BookRequest;
 import com.edu.ulab.app.web.request.UserBookRequest;
 import com.edu.ulab.app.web.response.UserBookResponse;
@@ -23,13 +21,13 @@ import java.util.stream.IntStream;
 @Slf4j
 @Component
 public class UserDataFacade {
-    private final UserServiceImplTemplate userService;
-    private final BookServiceImplTemplate bookService;
+    private final UserServiceImpl userService;
+    private final BookServiceImpl bookService;
     private final UserMapper userMapper;
     private final BookMapper bookMapper;
 
-    public UserDataFacade(UserServiceImplTemplate userService,
-                          BookServiceImplTemplate bookService,
+    public UserDataFacade(UserServiceImpl userService,
+                          BookServiceImpl bookService,
                           UserMapper userMapper,
                           BookMapper bookMapper) {
         this.userService = userService;
@@ -65,13 +63,13 @@ public class UserDataFacade {
                 .build();
     }
 
-    public UserBookResponse updateUserWithBooks(UserBookRequest userBookRequest, Long userId) {
+    public UserBookResponse updateUserWithBooks(UserBookRequest userBookRequest, Integer userId) {
         log.info("Got user book update request: {}", userBookRequest);
         log.info("Checking if ready to update");
         UserDto user = userService.getUserById(userId);
         log.info("Found user: {}", user);
         List<BookRequest> bookRequests = userBookRequest.getBookRequests();
-        List<Long> booksToBeUpdatedIdList = bookService.getBooksByUserId(userId)
+        List<Integer> booksToBeUpdatedIdList = bookService.getBooksByUserId(userId)
                 .stream()
                 .map(BookDto::getId)
                 .toList();
@@ -107,7 +105,7 @@ public class UserDataFacade {
                 .build();
     }
 
-    public UserBookResponse getUserWithBooks(Long userId) {
+    public UserBookResponse getUserWithBooks(Integer userId) {
         log.info("Got user book get request: userId {}", userId);
         UserDto user = userService.getUserById(userId);
         log.info("Got user from database: {}", user);
@@ -126,7 +124,7 @@ public class UserDataFacade {
                 .build();
     }
 
-    public void deleteUserWithBooks(Long userId) {
+    public void deleteUserWithBooks(Integer userId) {
         log.info("Got user book delete request: userId {}", userId);
         bookService.getBooksByUserId(userId)
                 .stream()

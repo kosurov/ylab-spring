@@ -37,8 +37,9 @@ public class UserRepositoryTest {
         //Given
         Person person = new Person();
         person.setAge(41);
-        person.setTitle("reader");
+        person.setTitle("reader1");
         person.setFullName("Test Test");
+        person.setCount(1);
 
         //When
         Person result = userRepository.save(person);
@@ -63,8 +64,9 @@ public class UserRepositoryTest {
         //Given
         Person person = new Person();
         person.setAge(41);
-        person.setTitle("reader");
+        person.setTitle("reader2");
         person.setFullName("Test Test");
+        person.setCount(1);
 
         Person savedPerson = userRepository.save(person);
 
@@ -73,6 +75,7 @@ public class UserRepositoryTest {
         updatedPerson.setAge(45);
         updatedPerson.setTitle("reader updated");
         updatedPerson.setFullName("Test Test updated");
+        updatedPerson.setCount(1);
 
         //When
         Person result = userRepository.save(updatedPerson);
@@ -99,8 +102,9 @@ public class UserRepositoryTest {
         //Given
         Person person = new Person();
         person.setAge(41);
-        person.setTitle("reader");
+        person.setTitle("reader3");
         person.setFullName("Test Test");
+        person.setCount(1);
 
         Person savedPerson = userRepository.save(person);
         Integer personId = savedPerson.getId();
@@ -111,7 +115,7 @@ public class UserRepositoryTest {
 
         //Then
         assertThat(result.getFullName()).isEqualTo("Test Test");
-        assertThat(result.getTitle()).isEqualTo("reader");
+        assertThat(result.getTitle()).isEqualTo("reader3");
         assertThat(result.getAge()).isEqualTo(41);
         assertSelectCount(1);
         assertInsertCount(1);
@@ -130,8 +134,9 @@ public class UserRepositoryTest {
         //Given
         Person person = new Person();
         person.setAge(41);
-        person.setTitle("reader");
+        person.setTitle("reader4");
         person.setFullName("Test Test");
+        person.setCount(1);
 
         Person savedPerson = userRepository.save(person);
 

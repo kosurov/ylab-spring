@@ -40,8 +40,9 @@ public class BookRepositoryTest {
         //Given
         Person person = new Person();
         person.setAge(111);
-        person.setTitle("reader");
+        person.setTitle("reader1");
         person.setFullName("Test Test");
+        person.setCount(1);
 
         Person savedPerson = userRepository.save(person);
 
@@ -77,8 +78,9 @@ public class BookRepositoryTest {
         //Given
         Person person = new Person();
         person.setAge(111);
-        person.setTitle("reader");
+        person.setTitle("reader2");
         person.setFullName("Test Test");
+        person.setCount(1);
 
         Person savedPerson = userRepository.save(person);
 
@@ -123,8 +125,9 @@ public class BookRepositoryTest {
         //Given
         Person person = new Person();
         person.setAge(111);
-        person.setTitle("reader");
+        person.setTitle("reader3");
         person.setFullName("Test Test");
+        person.setCount(1);
 
         Person savedPerson = userRepository.save(person);
 
@@ -163,8 +166,9 @@ public class BookRepositoryTest {
         //Given
         Person person = new Person();
         person.setAge(111);
-        person.setTitle("reader");
+        person.setTitle("reader4");
         person.setFullName("Test Test");
+        person.setCount(1);
 
         Person savedPerson = userRepository.save(person);
 

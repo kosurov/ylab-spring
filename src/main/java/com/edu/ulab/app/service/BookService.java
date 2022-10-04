@@ -3,12 +3,16 @@ package com.edu.ulab.app.service;
 
 import com.edu.ulab.app.dto.BookDto;
 
+import java.util.List;
+
 public interface BookService {
-    BookDto createBook(BookDto userDto);
+    BookDto createBook(BookDto bookDto);
 
-    BookDto updateBook(BookDto userDto);
+    BookDto updateBook(BookDto bookDto);
 
-    BookDto getBookById(Long id);
+    BookDto getBookById(Integer id);
 
-    void deleteBookById(Long id);
+    void deleteBookById(Integer id);
+
+    List<BookDto> getBooksByUserId(Integer id);
 }
